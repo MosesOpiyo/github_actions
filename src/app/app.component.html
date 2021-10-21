@@ -13,15 +13,20 @@
 <body>
     <div class="navbar" style="width: 100%;height: 10vh;background-color: blue;">
         <h1>jsonplaceholder Dummy app</h1>
+        <a href="https://github.com/MosesOpiyo/angular_project" style="padding-right: 20px;padding-top: 10px;">Github</a>
+    </div>
+    <div class="homepage">
+        <h1 style="color: black;">This is an application using JSONplaceholder</h1>
+        <p>The app displays an array of posts from JSONplaceholder api.</p>
     </div>
     <div class="container">
         <button (click)="getDataFromAPI()">Show posts</button>
 
         <ul *ngFor="let post of data">
             <div class="post_content">
-                <li>{{post.id}}</li>
-                <li>{{post.title}}</li>
-                <li>{{post.body}}</li>
+                <li>Id: {{post.id}}</li>
+                <li>Title: {{post.title}}</li>
+                <li>Body: {{post.body}}</li>
             </div>
         </ul>
 

@@ -15,6 +15,7 @@ export class AppComponent {
     this.data = new Array<any>()
   }
 
+
   getDataFromAPI() {
     this.jsonplaceholder.getData().subscribe((data) => {
       console.log(data)
