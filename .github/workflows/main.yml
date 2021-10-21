@@ -1,32 +1,35 @@
-# This is a basic workflow to help you get started with Actions
+name: GitHub Pages
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: [ master ]
- 
+    branches:
+    - main
 
 jobs:
- deploy:
-  runs-on: ubuntu-latest
-  steps:
-  - name: Checkout
-    uses: actions/checkout@v2
-    
-  - name: Setup Node.js
-    uses: actions/setup-node@v2
-    with:
-      node-version: '16'
-  
-  - name: Install dependencies
-    run: npm install
-    
-  - name: Deploy
-    if: success()
-    with:
-      github_token: ${{ secrets.GITHUB_TOKEN }}
-      publish_dir: dist/POST
-      enable_jekyll: true
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm run test:headless
+
+    - name: Build
+      run: npm run build:prod
+
+    - name: Deploy
+      if: success()
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: dist/angular-github-actions
+        enable_jekyll: true
